@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>예약 신청</title>
+    <style>
+      body {
+        margin: 0 auto;
+        background-color: floralwhite;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100%;
+        margin: 0 auto;
+        margin-top: 2em;
+      }
+
+      .container {
+        background: white;
+        width: 74%;
+        max-width: 420px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+        text-align: center;
+        margin-top: 4.5vh;
+      }
+
+      .container h2 {
+        font-weight: bold;
+        text-align: left;
+        margin-bottom: 10px;
+      }
+
+      .info {
+        font-size: 16px;
+        font-weight: bold;
+        text-align: left;
+        padding: 10px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+      }
+
+      .image-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+
+      .image-container img {
+        width: 20vw;
+        border-radius: 10px;
+        height: 13vh;
+        margin-left: 20px;
+        margin-bottom: 10px;
+        margin-top: 7px;
+      }
+
+      .current-people {
+        font-size: 14px;
+        margin-left: 10px;
+        white-space: nowrap;
+        text-align: center;
+        width: 100%;
+        line-height: 1.4;
+        margin: 0 auto;
+      }
+
+      .participant-list {
+        width: 94%;
+        background: #e6e6e6;
+        padding: 10px;
+        border-radius: 10px;
+        text-align: left;
+      }
+
+      .participant-list table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .participant-list th,
+      .participant-list td {
+        padding: 8px;
+        text-align: left;
+        font-size: 10px;
+      }
+
+      .participant-list th {
+        font-weight: bold;
+      }
+
+      .comment-section {
+        margin-top: 15px;
+        text-align: left;
+      }
+
+      .comment-box {
+        width: 95%;
+        height: 4em;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background: #f9f9f9;
+        font-size: 14px;
+        margin: 5px auto;
+        display: block;
+        outline: none;
+      }
+
+      .btn-container {
+        
+        margin-top: 15px;
+        
+      }
+
+      .btn {
+        width: 75px;
+        height: 30px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+      }
+
+      .flash-messages {
+        margin-top: 10px;
+        text-align: center;
+      }
+
+      .flash-message {
+        padding: 10px;
+        border-radius: 10px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: bold;
+        margin: 5px auto;
+        max-width: 100%;
+      }
+
+      .flash-error {
+        background-color: #ffebee;
+        color: red;
+      }
+
+      .flash-success {
+        background-color: #e8f5e9;
+        color: green;
+      }
+
+      .btn.join {
+        background: navajowhite;
+        color: black;
+      }
+
+      .btn.cancel {
+        background: lightgrey;
+        color: black;
+      }
+
+      .btn:hover {
+        opacity: 0.8;
+      }
+
+      #grey_line {
+        width: 100%;
+        height: 4px;
+        background: #ccc;
+        margin: 10px 0;
+      }
+
+      .grey_text {
+        font-size: 8px;
+        color: #979797;
+        margin-top: 10px;
+        width: 100%;
+        text-align: center;
+      }
+      #title_box {
+        display: grid;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+      }
+
+      .grey_text {
+        color: grey;
+        font-size: 14px;
+      }
+
+      #main_text {
+        width: 100%;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          margin-top: 1em;
+          height: auto;
+        }
+
+        .container {
+          width: 18em;
+          max-width: 380px;
+          padding: 15px;
+          margin-top: 11vh;
+        }
+
+        .container h2 {
+          font-size: 20px;
+          margin-bottom: 8px;
+        }
+
+        .info {
+          font-size: 20px;
+          padding: 5px;
+          margin-bottom: 1px;
+          text-align: center;
+        }
+
+        .image-container img {
+          width: 40vw;
+          height: 12vh;
+        }
+
+        .current-people {
+          font-size: 20px;
+          margin: 10px;
+        }
+
+        .participant-list {
+          width: 64vw;
+          padding: 8px;
+          margin: 0 auto;
+        }
+
+        .participant-list th,
+        .participant-list td {
+          font-size: 12px;
+          padding: 6px;
+        }
+
+        .comment-box {
+          width: 92%;
+          height: 3.5em;
+          font-size: 12px;
+          padding: 8px;
+        }
+
+        .btn-container {
+          gap: 8px;
+        }
+
+        .btn {
+          width: 65px;
+          height: 28px;
+          font-size: 15px;
+        }
+
+        .flash-message {
+          font-size: 12px;
+          padding: 8px;
+        }
+
+        .grey_text {
+          font-size: 12px;
+        }
+
+        #title_box {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .grey_text {
+          text-align: left;
+          margin-top: 5px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div id="title_box">
+        <h2 id="main_text">예약 신청</h2>
+        <div class="grey_text">인원 모집을 위해 코멘트를 남겨 참여하세요!</div>
+      </div>
+
+      <div id="grey_line"></div>
+
+      <div class="info"><span>{{ date }} {{ time }}</span><br /></div>
+
+      <div class="image-container">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/7107/7107597.png"
+          alt="장소 이미지"
+        />
+        <div class="current-people">
+          현재 인원 <br />
+          {{ count }}명 / 6명
+        </div>
+      </div>
+
+      <div class="participant-list">
+        <table>
+          <tr>
+            <th style="color: #e6e6e6">#</th>
+            <th>참여자</th>
+            <th>코멘트</th>
+          </tr>
+          {% for i in range(6) %}
+          <tr>
+            <td>{{ i+1 }}.</td>
+            {% if i < data|length %}
+            <td>{{ data[i].username }}</td>
+            <td>{{ data[i].comment }}</td>
+            {% else %}
+            <td style="color: gray">대기 중...</td>
+            <td style="color: gray">-</td>
+            {% endif %}
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+
+      <!-- 에러 및 성공 메시지 출력 -->
+      {% if error %}
+      <div
+        style="
+          color: red;
+          background-color: #ffebee;
+          padding: 10px;
+          border-radius: 10px;
+          text-align: center;
+          margin-top: 10px;
+        "
+      >
+        {{ error }}
+      </div>
+      {% endif %} {% if success %}
+      <div
+        style="
+          color: green;
+          background-color: #e8f5e9;
+          padding: 10px;
+          border-radius: 10px;
+          text-align: center;
+          margin-top: 10px;
+        "
+      >
+        {{ success }}
+      </div>
+      {% endif %}
+
+      <form
+        action="{{ url_for('reservation_comf', reservation_id=reservation_id) }}"
+        method="POST"
+      >
+        <input type="hidden" name="post_id" value="{{ post_id }}" />
+        <input type="hidden" name="date" value="{{ date }}" />
+        <input type="hidden" name="time" value="{{ time }}" />
+        <input type="hidden" name="count" value="{{ count }}" />
+        <input type="hidden" name="username" value="{{ username }}" />
+
+        <div class="comment-section">
+          <b>코멘트</b>
+          <input
+            type="text"
+            name="comment"
+            class="comment-box"
+            required
+            minlength="2"
+            maxlength="13"
+          />
+        </div>
+
+        <!-- ✅ Flash 메시지를 코멘트 입력 박스 바로 아래에 표시 -->
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+          <div class="flash-message flash-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+        {% endif %} {% endwith %}
+        <div class="btn-container">
+          <button type="submit" class="btn join">참여</button>
+          <button
+            type="button"
+            class="btn cancel"
+            onclick="location.href='/reserve'"
+          >
+            닫기
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

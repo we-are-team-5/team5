@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<meta lang="ko">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>마이페이지</title>
+  <style>
+    body {
+      background-color: floralwhite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+      font-family: "Arial", sans-serif;
+    }
+
+    .container {
+      background: white;
+      width: 70%;
+      max-width: 400px;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      margin-top: 5vh;
+    }
+
+    .title {
+      font-size: 2.6em;
+      text-align: center;
+      color: #f56767;
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+
+    h2 {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .info {
+      font-size: 16px;
+      color: red;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      font-size: 18px;
+      font-weight: bold;
+      background: black;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin-top: 1vh;
+      display: block;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: #333;
+    }
+
+    .top-menu {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .top-menu a {
+      text-decoration: none;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .top-menu a:hover {
+      text-decoration: underline;
+    }
+
+    .separator {
+      height: 2px;
+      background: #ddd;
+      margin: 20px 0;
+    }
+
+    .back-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 1rem;
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        width: 80%;
+        max-width: 350px;
+        padding: 6vw;
+      }
+
+      .title {
+        font-size: 2.3rem;
+      }
+
+      h2 {
+        font-size: 1.5em;
+      }
+
+      .btn {
+        font-size: 1rem;
+        padding: 1rem;
+      }
+
+      .top-menu {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        /* display: flex; */
+        /* gap: 10px; */
+        display: inline;
+      }
+    }
+  </style>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>예약 화면</title>
+    <style>
+      body {
+        background-color: floralwhite;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+        margin: 0;
+      }
+
+      /* Mypage & Logout 버튼 스타일 */
+      .top-menu {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        display: flex;
+        gap: 10px;
+      }
+
+      .top-menu a {
+        text-decoration: none;
+        font-size: 14px;
+        color: #666;
+      }
+
+      .top-menu a:hover {
+        text-decoration: underline;
+      }
+
+      .container {
+        background: white;
+        width: 80%;
+        max-width: 420px;
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .container h2 {
+        font-size: 25px;
+        font-weight: bold;
+        text-align: left;
+        margin-bottom: 10px;
+      }
+
+      .info {
+        font-size: 16px;
+        text-align: left;
+        color: red;
+        margin-bottom: 15px;
+      }
+
+      .participant-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .participant-box {
+        width: 94%;
+        background: #e6e6e6;
+        padding: 10px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .image-container {
+        display: flex;
+        align-items: center;
+      }
+
+      .image-container img {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        margin-right: 10px;
+      }
+
+      /* 날짜 & 시간 스타일 조정 */
+      .match-info {
+        flex-grow: 1;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: left;
+        line-height: 1.4;
+      }
+
+      /* 🔹 마감된 항목(예약이 꽉 찼거나 시간이 지난 경우)의 날짜와 시간 색상을 연한 회색으로 변경 */
+      .full-text {
+        color: #bbbbbb !important;
+      }
+
+      /* 참여하기 버튼 스타일 */
+      .join-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #ff6666;
+        color: white;
+        font-size: 14px;
+        padding: 8px 12px;
+        border-radius: 10px;
+        font-weight: bold;
+        text-align: center;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      /* 🔹 예약 인원이 6명이거나 시간이 지난 항목의 버튼 비활성화 */
+      .full-button {
+        pointer-events: none;
+        background-color: grey;
+      }
+
+      .join-box span {
+        font-size: 12px;
+        font-weight: normal;
+      }
+
+      .participant-count {
+        font-size: 12px;
+        font-weight: normal;
+        margin-top: 3px;
+      }
+
+      #grey_line {
+        width: 100%;
+        height: 4px;
+        background: #ccc;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Mypage & Logout 버튼 -->
+    <div class="top-menu">
+      <a href="/mypage">Mypage</a>
+      <a href="/logout">Logout</a>
+    </div>
+
+    <div class="container">
+      <h2>모집중인 경기</h2>
+      <div id="grey_line"></div>
+      <div class="info">
+        <span
+          >반코트 경기는 매주 주말 10:00, 13:00, 19:00만 모집하고
+          있습니다.</span
+        >
+      </div>
+
+      <div class="participant-container">
+        {% for match in matches %}
+        <div class="participant-box">
+          <div class="image-container">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/889/889455.png"
+              alt="장소 이미지"
+            />
+          </div>
+          <!-- 예약이 꽉 찼거나 시간이 지난 경우 날짜 & 시간 회색 처리 -->
+          <div
+            class="match-info {% if match.reservations >= 6 or match.is_expired %} full-text {% endif %}"
+          >
+            {{ match.date }} ({{ match.weekday }}) <br />
+            {{ match.time }}
+          </div>
+          <!-- 예약이 꽉 찼거나 시간이 지난 경우 버튼 비활성화 -->
+          <a
+            href="{{ url_for('reservation_detail', reservation_id=match._id) }}"
+            class="join-box {% if match.reservations >= 6 or match.is_expired %} full-button {% endif %}"
+          >
+            {% if match.reservations >= 6 or match.is_expired %} 마감 {% else %}
+            참여하기 {% endif %}
+            <div class="participant-count">
+              {{ match.reservations }}명 / 6명
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</meta>

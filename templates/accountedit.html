@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원정보 수정</title>
+    <style>
+body {
+    background-color: floralwhite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+    font-family: 'Arial', sans-serif;
+}
+
+.title {
+    font-size: 36px;
+    text-align: center;
+    color: #F56767;
+    margin-bottom: 20px;
+    line-height: 1.3;
+    margin-top: 1em;
+}
+
+
+.image-container img {
+      width: 70px;
+      height: 55px;
+      border-radius: 10px;
+      margin-bottom: -7px;
+    }
+
+
+.container {
+    background: #FFFFFF;
+    width: 80%;
+    max-width: 400px;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.error-messages {
+    background-color: #ffdddd;
+    color: red;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.success-messages {
+    background-color: #ddffdd;
+    color: green;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 94%;
+    padding: 10px;
+    border: none;
+    background: #f0f0f0;
+    font-size: 16px;
+    border-bottom: 2px solid #000;
+    outline: none;
+    border-radius: 4px;
+}
+
+.signup-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    background: darkorange;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 12px;
+}
+
+.signup-btn:hover {
+    background: #333;
+}
+
+/* 모바일 및 데스크톱 공통 스타일 */
+@media screen and (max-width: 768px) {
+    body {
+        background-color: floralwhite;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0 auto;
+        flex-direction: column;
+        font-family: "Arial", sans-serif;
+    }
+
+    .error-messages {
+        background-color: #ffdddd;
+        color: red;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
+
+    .success-messages {
+        background-color: #2aceeb;
+        color: rgb(0, 0, 0);
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
+
+    .title {
+        font-size: 38px;
+        text-align: center;
+        color: #f56767;
+        margin-bottom: 20px;
+        line-height: 1.4;
+    }
+
+    .bold {
+        font-weight: bold;
+    }
+
+    .container {
+        background: #ffffff;
+        width: 73%;
+        max-width: 400px;
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        height: auto;
+    }
+
+    .container h2 {
+        font-size: 22px;
+        text-align: left;
+        margin-bottom: 20px;
+        margin-top: -7px
+    }
+
+    .input-group {
+        text-align: left;
+        margin-bottom: 15px;
+    }
+
+    .input-group label {
+        font-size: 14px;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .input-group input {
+        width: 95%;
+        padding: 12px;
+        border: none;
+        background: #f0f0f0;
+        font-size: 16px;
+        border-bottom: 2px solid #000;
+        outline: none;
+        transition: border-color 0.3s;
+    }
+
+    .input-group input:focus {
+        border-bottom: 2px solid #007bff;
+    }
+
+    .input-group input[readonly] {
+        background-color: #f0f0f0;
+        color: #888888;
+        border-bottom: 2px solid #888888;
+    }
+
+    .signup-btn {
+        width: 100%;
+        padding: 14px;
+        font-size: 18px;
+        background: darkorange;
+        color: white;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background 0.3s;
+    }
+
+    .signup-btn:hover {
+        background: #333;
+    }
+
+    .signup {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 25px;
+        font-size: 14px;
+        color: gray;
+    }
+
+    .signup a {
+        color: black;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .home-btn {
+        position: absolute;
+        top: 15px;
+        left: 20px;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: normal;
+        color: #666;
+        cursor: pointer;
+        font-family: "none";
+    }
+
+    .home-btn:hover {
+        text-decoration: underline;
+    }
+}
+</style>
+  </head>
+
+  <body>
+    <a href="/reserve" class="home-btn">HOME</a>
+
+    <div class="title">
+      <div class="image-container">
+        <img src="https://mblogthumb-phinf.pstatic.net/MjAyNTAzMTNfMjcw/MDAxNzQxODMzNTgzODc3._OdETd6Jv0VJw41UtZRLs881hAutbTOhOfTLnvCAJv0g.VhOBBrRzwD7mzDdBt-iAV1OCb1OpV-rVly5ckHvtrsQg.PNG/IMG_7546.png?type=w800" alt="장소 이미지" />
+      </div>
+      <b class="bold">주</b>말의<br /><b class="bold">반</b>코트
+    </div>
+    <div class="container">
+      <h2>회원정보 수정</h2>
+      <form action="/update_user" method="POST">
+        <div class="input-group">
+          <label for="user_id">아이디</label>
+          <input
+            type="text"
+            id="user_id"
+            name="user_id"
+            value="{{ user_id }}"
+            readonly
+            required
+          />
+        </div>
+        <div class="input-group">
+          <label for="password">비밀번호</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <div class="input-group">
+          <label for="password_re">비밀번호 확인</label>
+          <input type="password" id="password_re" name="password_re" required />
+        </div>
+        <div class="input-group">
+          <label for="username">성함</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value="{{ username }}"
+            required
+          />
+        </div>
+        <div class="input-group">
+          <label for="phone_num">휴대폰 번호</label>
+          <input
+            type="text"
+            id="phone_num"
+            name="phone_num"
+            value="{{ phone_num }}"
+            required
+          />
+        </div>
+
+        <!-- Flash 메시지 표시 -->
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %} {% for category, message in messages %}
+        <div
+          class="{% if category == 'error' %}error-messages{% elif category == 'success' %}success-messages{% endif %}"
+        >
+          {{ message }}
+        </div>
+        {% endfor %} {% endif %} {% endwith %}
+
+        <button type="submit" class="signup-btn ">수정하기</button>
+      </form>
+    </div>
+  </body>
+</html>

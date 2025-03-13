@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나의 예약</title>
+    <style>
+        body {
+            background-color: floralwhite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            overflow-y: auto;
+            max-height: 700px;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .divider {
+            width: 100%;
+            height: 2px;
+            background: #ddd;
+            margin: 15px 0;
+        }
+
+        .reservation-item {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .reservation-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .reservation-header img {
+            width: 120px;
+            height: 100px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .reservation-info {
+            flex: 1;
+        }
+
+        .date-time {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .people-count {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .participant-list {
+            width: 100%;
+            background: #f8f8f8;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .participant-list table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .participant-list th, .participant-list td {
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .participant-list th {
+            font-weight: bold;
+            border-bottom: 2px solid #ccc;
+            text-align: center;
+        }
+
+        .btn-container {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .btn {
+            width: 90%;
+            height: 40px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn.cancel-btn {
+            color: white;
+            background-color: darkorange;
+        }
+
+        .btn.cancel-btn:hover {
+            cursor: pointer;
+        }
+
+        /* 반응형 스타일 */
+        @media (max-width: 768px) {
+            .container {
+                width: 78%;
+                max-width: 400px;
+            }
+
+            .reservation-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .reservation-header img {
+                width: 40%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>나의 예약</h2>
+        <div class="divider"></div>
+
+        {% if reservations %}
+        {% for reservation in reservations %}
+        <div class="reservation-item">
+            <div class="reservation-header">
+                <img src="https://cdn-icons-png.flaticon.com/512/7107/7107597.png" alt="장소 이미지" />
+                <div class="reservation-info">
+                    <div class="date-time">{{ reservation.date }} {{ reservation.time }}</div>
+                    <div class="people-count">인원: <strong>{{ reservation.count }}명 / 6명</strong></div>
+                </div>
+            </div>
+
+            <div class="participant-list">
+                <table>
+                    <tr>
+                        <th style="color:#f8f8f8;">#</th>
+                        <th>참여자</th>
+                        <th>연락처</th>
+                    </tr>
+                    {% for i in range(6) %}
+                    <tr>
+                        {% if i < reservation.users|length %}
+                        <td>{{ i + 1 }}.</td>
+                        <td>{{ reservation.users[i].username }}</td>
+                        <td>{{ reservation.users[i].phone_num }}</td>
+                        {% else %}
+                        <td>{{ i + 1 }}.</td>
+                        <td>-</td>
+                        <td>-</td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            <!-- 예약 취소 버튼 -->
+            <div class="btn-container">
+                <form action="{{ url_for('cancel_reservation', reservation_id=reservation.id) }}" method="POST">
+                    <button type="submit" class="btn cancel-btn">예약 취소</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="empty-message">앗, 아직 예약 내역이 없어요 :(</div>
+        {% endif %}
+    </div>
+</body>
+</html>

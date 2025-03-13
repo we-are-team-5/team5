@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로그인</title>
+    <style>
+      body {
+        background-color: floralwhite;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0 auto;
+        flex-direction: column;
+        font-family: "Arial", sans-serif;
+      }
+
+      .image-container img {
+      width: 70px;
+      height: 55px;
+      border-radius: 10px;
+      margin-bottom: -25px;
+    }
+
+      h2 {
+        text-align: left;
+      }
+
+      .title {
+        font-size: 2.6em;
+        text-align: center;
+        color: #f56767;
+        margin-bottom: 20px;
+        line-height: 1.3;
+        margin-top: 1em;
+      }
+
+      .error-messages {
+        background-color: #ffdddd;
+        color: red;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+      }
+
+      .success-messages {
+        background-color: #2aceeb;
+        color: rgb(0, 0, 0);
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+      }
+
+      .container {
+        background: white;
+        width: 70%;
+        max-width: 400px;
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        height: 51vh;
+        margin-top: 1.2vh;
+      }
+
+      .input-group {
+        text-align: left;
+        margin-bottom: 15px;
+        margin-top: 5vh;
+      }
+
+      .input-group label {
+        font-size: 14px;
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .input-group input {
+        width: 95%;
+        padding: 12px;
+        border: none;
+        background: #f0f0f0;
+        font-size: 16px;
+        border-bottom: 2px solid #000;
+        outline: none;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 14px;
+        font-size: 18px;
+        font-weight: bold;
+        background: darkorange;
+        color: white;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        margin-top: 2vh;
+      }
+
+      .btn:hover {
+        background: #333;
+      }
+
+      .signup {
+        margin-top: 5vh;
+        display: flex;
+        gap: 12.5rem;
+      }
+
+      .signup a {
+        color: black;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          width: 70%; 
+          max-width: 400px;
+          padding: 6vw;
+        }
+
+        .title {
+          font-size: 2.3rem;
+        }
+
+        .input-group input {
+          font-size: 0.9rem;
+          padding: 0.8rem;
+        }
+
+        .btn {
+          font-size: 1rem;
+          padding: 1rem;
+        }
+
+        .signup {
+          justify-content: space-between;         
+          text-align: center;
+          gap: 10px;
+        }
+      }
+    </style>
+    <script>
+      window.onload = function() {
+        // 플래시 메시지가 있는 경우 .signup 숨기기
+        const messages = document.querySelectorAll('.error-messages, .success-messages');
+        if (messages.length > 0) {
+          const signupSection = document.querySelector('.signup');
+          if (signupSection) {
+            signupSection.style.display = 'none';
+          }
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div class="image-container">
+      <img src="https://mblogthumb-phinf.pstatic.net/MjAyNTAzMTNfMjcw/MDAxNzQxODMzNTgzODc3._OdETd6Jv0VJw41UtZRLs881hAutbTOhOfTLnvCAJv0g.VhOBBrRzwD7mzDdBt-iAV1OCb1OpV-rVly5ckHvtrsQg.PNG/IMG_7546.png?type=w800" alt="장소 이미지" />
+    </div>
+    <div class="title"><b>주</b>말의<br /><b>반</b>코트</div>
+    <div class="container">
+      <h2>로그인</h2>
+
+      <!-- Flash 메시지 표시 -->
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+      <div
+        class="{% if category == 'error' %}error-messages{% elif category == 'success' %}success-messages{% endif %}"
+      >
+        {{ message }}
+      </div>
+      {% endfor %} {% endif %} {% endwith %}
+
+      <form method="POST" action="/login">
+        <div class="input-group">
+          <label for="user_id">아이디</label>
+          <input type="text" name="user_id" required />
+        </div>
+        <div class="input-group">
+          <label for="password">비밀번호</label>
+          <input type="password" name="password" required />
+        </div>
+        <button class="btn" type="submit">로그인</button>
+      </form>
+      <div class="signup">
+        <span>신규 사용자이신가요?</span>
+        <a href="/signup">회원가입</a>
+      </div>
+    </div>
+  </body>
+</html>
